@@ -1,6 +1,6 @@
 import { html, render } from "lit";
 import "./style.css";
-import { client, createFruit, Fruit, getFruits } from "./api";
+import { client, createFruit, Fruit, getFruitById, getFruitByName, getFruits } from "./api";
 
 const FRUIT_COLL: Fruit[] = [
     {
@@ -52,6 +52,14 @@ async function addFruit(fruit: Fruit) {
     update();
 }
 
+async function getNamedFruit(name: string) {
+    getFruitByName({ path: { name } });
+}
+
+async function getFruit(id: number) {
+    getFruitById({ path: { id } });
+}
+
 async function update() {
     const fruits = await getFruits()
         .then(res => res.data)
@@ -74,5 +82,7 @@ async function update() {
         document.body,
     );
 }
+
+getNamedFruit("Orange");
 
 update();

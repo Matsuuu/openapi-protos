@@ -22,7 +22,23 @@ export type CreateFruitResponse = (unknown);
 
 export type CreateFruitError = unknown;
 
-export type GetFruitByNameResponse = (((Fruit) | null));
+export type GetFruitByIdData = {
+    path: {
+        id: number;
+    };
+};
+
+export type GetFruitByIdResponse = ((Fruit | null));
+
+export type GetFruitByIdError = unknown;
+
+export type GetFruitByNameData = {
+    path: {
+        name: string;
+    };
+};
+
+export type GetFruitByNameResponse = ((Fruit | null));
 
 export type GetFruitByNameError = unknown;
 

@@ -30,7 +30,15 @@ public class FruitsResource {
     }
 
     @GET
-    @Path("/:name")
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Operation(operationId = "getFruitById")
+    public Optional<Fruit> getFruitById(@PathParam("id") Long id) {
+        return Fruit.find("id", id).firstResultOptional();
+    }
+
+    @GET
+    @Path("/{name}")
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(operationId = "getFruitByName")
     public Optional<Fruit> getFruitByName(@PathParam("name") String name) {
