@@ -1,0 +1,115 @@
+{
+  "openapi" : "3.0.1",
+  "components" : {
+    "schemas" : {
+      "Fruit" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          }
+        }
+      },
+      "FruitsResponse" : {
+        "type" : "object",
+        "properties" : {
+          "fruits" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Fruit"
+            }
+          }
+        }
+      }
+    }
+  },
+  "paths" : {
+    "/fruits" : {
+      "get" : {
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/FruitsResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary" : "Get Fruits",
+        "tags" : [ "Fruits Resource" ]
+      },
+      "post" : {
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Fruit"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        },
+        "summary" : "Create Fruit",
+        "tags" : [ "Fruits Resource" ]
+      }
+    },
+    "/fruits/:name" : {
+      "get" : {
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "allOf" : [ {
+                    "$ref" : "#/components/schemas/Fruit"
+                  } ],
+                  "nullable" : true
+                }
+              }
+            }
+          }
+        },
+        "summary" : "Get Fruit By Name",
+        "tags" : [ "Fruits Resource" ]
+      }
+    },
+    "/hello" : {
+      "get" : {
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "text/plain" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          }
+        },
+        "summary" : "Hello",
+        "tags" : [ "Greeting Resource" ]
+      }
+    }
+  },
+  "info" : {
+    "title" : "quarkus API",
+    "version" : "1.0.0-SNAPSHOT"
+  }
+}
